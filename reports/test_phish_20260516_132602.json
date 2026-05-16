@@ -1,0 +1,74 @@
+{
+    "file": "test_phish.eml",
+    "timestamp": "20260516_132602",
+    "parsed_email": {
+        "sender": "PayPal Security <security@paypa1-support.com>",
+        "reply_to": "collect@harvester-domain.ru",
+        "to": "victim@gmail.com",
+        "subject": "URGENT: Your account has been suspended - Verify immediately",
+        "date": "Sat, 16 May 2026 10:23:11 +0000",
+        "message_id": "<abc123@paypa1-support.com>",
+        "spf": "fail (domain of paypa1-support.com does not designate    192.168.1.1 as permitted sender)",
+        "dkim": "Missing",
+        "dmarc": "mx.google.com;    dkim=fail header.i=@paypa1-support.com;    dmarc=fail action=none header.from=paypa1-support.com",
+        "sender_ip": "185.220.101.45",
+        "urls": [
+            "http://secure-paypal-update.tk/verify/account",
+            "http://paypal-verify-account.suspicious-domain.xyz/login?ref=suspend123"
+        ],
+        "attachments": [],
+        "body_preview": "Dear Valued Customer,\n\nWe have detected unusual activity on your PayPal account.\nYour account has been temporarily suspended.\n\nTo restore access, please verify your identity immediately by clicking the link below:\n\nhttp://paypal-verify-account.suspicious-domain.xyz/login?ref=suspend123\nhttp://secure-paypal-update.tk/verify/account\n\nFailure to verify within 24 hours will result in permanent account closure.\n\nRegards,\nPayPal Security Team\n\nThis email was sent from a notification-only address."
+    },
+    "header_analysis": {
+        "source": "Header Analysis",
+        "anomalies": [
+            "SPF check failed",
+            "DKIM signature missing",
+            "DMARC check failed",
+            "Reply-To mismatch: sender=PayPal Security <security@paypa1-support.com>, reply_to=collect@harvester-domain.ru",
+            "Suspicious subject keywords: ['urgent', 'verify', 'suspended', 'account', 'immediately']"
+        ],
+        "risk_indicators": [
+            "SPF_FAIL",
+            "DKIM_MISSING",
+            "DMARC_FAIL",
+            "REPLY_TO_MISMATCH",
+            "SUSPICIOUS_SUBJECT"
+        ],
+        "spf_status": "fail (domain of paypa1-support.com does not designate    192.168.1.1 as permitted sender)",
+        "dkim_status": "Missing",
+        "dmarc_status": "mx.google.com;    dkim=fail header.i=@paypa1-support.com;    dmarc=fail action=none header.from=paypa1-support.com",
+        "reply_to_mismatch": true
+    },
+    "url_results": [
+        {
+            "url": "http://secure-paypal-update.tk/verify/account",
+            "virustotal": {
+                "source": "VirusTotal",
+                "url": "http://secure-paypal-update.tk/verify/account",
+                "malicious": 0,
+                "suspicious": 0,
+                "harmless": 0,
+                "undetected": 0
+            },
+            "urlscan": {
+                "error": "URLscan submission failed: 400"
+            }
+        },
+        {
+            "url": "http://paypal-verify-account.suspicious-domain.xyz/login?ref=suspend123",
+            "virustotal": {
+                "source": "VirusTotal",
+                "url": "http://paypal-verify-account.suspicious-domain.xyz/login?ref=suspend123",
+                "malicious": 0,
+                "suspicious": 0,
+                "harmless": 0,
+                "undetected": 0
+            },
+            "urlscan": {
+                "error": "URLscan submission failed: 400"
+            }
+        }
+    ],
+    "ai_analysis": "**Phishing Assessment Report**\n\n1. **PHISHING VERDICT**: Phishing\n2. **CONFIDENCE SCORE**: 95%\n3. **KEY INDICATORS**:\n\t* SPF fail and DMARC fail indicate potential spoofing\n\t* DKIM signature missing, further suggesting spoofing\n\t* Reply-To mismatch with a suspicious domain\n\t* Suspicious subject keywords and urgent tone\n\t* URLs in the email body point to suspicious domains\n4. **ATTACK TYPE**: Credential harvesting\n5. **RECOMMENDED ACTION**: Block\n6. **MITRE ATT&CK MAPPING**:\n\t* T1566: Phishing (Spearphishing Attachment, Spearphishing Link)\n\t* T1183: Image File Execution Options Injection ( potential malware delivery via phishing)\n\n**Rationale**: The email exhibits multiple strong indicators of phishing, including authentication failures, suspicious URLs, and a misleading subject line. The attack aims to harvest PayPal credentials by creating a sense of urgency and prompting the victim to click on malicious links. The recommended action is to block the email to prevent potential harm."
+}
